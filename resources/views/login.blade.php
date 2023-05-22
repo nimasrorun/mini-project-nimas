@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-  <link href="assets/css/login.css" rel="stylesheet">
+  <link href="{{asset('assets/css/login.css')}}" rel="stylesheet">
 </head>
 <body>
   <div class="cont">
@@ -67,7 +67,7 @@
 
 
 <!-- Template Main JS File -->
-<script src="assets/js/login.js"></script>
+<script src="{{asset('assets/js/login.js')}}"></script>
 
 </body>
 </html>
