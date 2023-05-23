@@ -46,14 +46,14 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{route('listpenulis')}}">
+                <a class="nav-link" href="{{route('admin.list-penulis.index')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>List Penulis</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{route('listartikeladmin')}}">
+                <a class="nav-link" href="{{route('admin.list-artikel.index')}}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>List Artikel</span></a>
             </li>
@@ -115,8 +115,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nimas Rorun</span>
-                                
+                                <form action="{{ route('admin.logout') }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-danger">Logout </button>
+                                </form>                                
                             </a>
                           
                         </li>
@@ -143,19 +145,19 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr class="">
-                                                <th class="">Judul Berita</th>
-                                                <th class="">Aksi</th>
+                                                <th>Judul Artikel</th>
+                                                <th>Penulis</th>
+                                                <th>Tanggal</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="">
-                                                <td class=""></td>
-                                                <td class="">
-                                                    <form action="" method="POST">
-                                                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @foreach ($artikel as $item)
+                                                <tr>
+                                                    <td>{{ $item->judul_artikel }}</td>
+                                                    <td>{{ $item->id_penulis }}</td>
+                                                    <td>{{ $item->tanggal }}</td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

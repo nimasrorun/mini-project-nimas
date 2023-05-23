@@ -9,22 +9,26 @@
 </head>
 <body>
   <div class="cont">
-    <div class="form sign-in">
-      <h2>Login</h2>
-      <p>Welocome to Insightful Ink</p>
-      <label>
-        <span>Email</span>
-        <input type="email" />
-      </label>
-      <label>
-        <span>Password</span>
-        <input type="password" />
-      </label>
+    <form action="{{ route('penulis.login.submit') }}" method="POST">
+      @csrf
+      <div class="form sign-in">
+        <h2>Login</h2>
+        <p>Welocome to Insightful Ink</p>
+        <label>
+          <span>Email</span>
+          <input type="text" name="username"/>
+        </label>
+        <label>
+          <span>Password</span>
+          <input type="password" name="password"/>
+        </label>
+        
       
-     
-      <button type="button" class="submit">Sign In</button>
- 
-    </div>
+        <button type="submit" class="submit">Sign In</button>
+  
+      </div>
+    </form>
+
     <div class="sub-cont">
       <div class="img">
         <div class="img__text m--up">
@@ -41,21 +45,19 @@
         </div>
       </div>
       <div class="form sign-up">
+        <form action="{{ route('penulis.register') }}" method="POST">
+          @csrf
         <h2>Register</h2>
         <label>
           <span>Username</span>
-          <input type="text" />
-        </label>
-        <label>
-          <span>Email</span>
-          <input type="email" />
+          <input type="text" name="username"/>
         </label>
         <label>
           <span>Password</span>
-          <input type="password" />
+          <input type="password" name="password"/>
         </label>
-        <button type="button" class="submit">Sign Up</button>
-
+        <button type="submit" class="submit">Sign Up</button>
+      </form>
       </div>
     </div>
   </div>

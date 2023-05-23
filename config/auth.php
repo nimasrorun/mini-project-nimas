@@ -36,10 +36,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'admin' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'admins',
         ],
+        'penulis_guard' => [
+            'driver' => 'session',
+            'provider' => 'penulis',
+        ]
     ],
 
     /*
@@ -60,10 +64,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Admin::class,
         ],
+        'penulis' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Penulis::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',

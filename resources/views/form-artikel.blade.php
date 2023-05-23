@@ -5,12 +5,11 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Insightful Ink</title>
+  <title>Blog Single - Serenity Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('img/favicon.png')}}" rel="icon">
   <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
@@ -27,6 +26,13 @@
 
   <!-- Template Main CSS File -->
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Serenity - v4.1.0
+  * Template URL: https://bootstrapmade.com/serenity-bootstrap-corporate-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
@@ -36,92 +42,112 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h5 class="text-light"><a href="index.html">Insightful Ink</a></h5>
+        <h1 class="text-light"><a href="index.html">Serenity</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
-      @if (Auth::guard('penulis_guard')->check())
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{ route('homepage') }}">Home</a></li>
-          <li><a class="active" href="{{ route('list-artikel.index') }}">Artikel</a></li>
+          <li><a href="home-penulis.html">Home</a></li>
+          <li><a class="active" href="penulis.html">Artikel</a></li>
         
 
-          <li>
-            <form action="{{ route('penulis.logout') }}" method="POST">
-              @csrf
-            <button class="getstarted" type="submit">Logout</button>
-          </form>
-          </li>
+          <li><a class="getstarted" href="login.html">Logout</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-      @else
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="getstarted" href="{{ route('penulis.login') }}">Login</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav>
-      @endif
-      
+      </nav><!-- .navbar -->
+
     </div>
   </header><!-- End Header -->
 
   <main id="main">
-   <!-- ======= Breadcrumbs ======= -->
-   <section id="breadcrumbs" class="breadcrumbs">
-    <div class="breadcrumb-hero">
-      <div class="container">
-        <div class="breadcrumb-hero">
-          <h2>Artikel Tentang Perkembangan Teknologi Informasi</h2>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <ol>
-       
-      </ol>
-    </div>
-  </section><!-- End Breadcrumbs -->
 
-    <!-- ======= Blog Section ======= -->
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+     
+      <div class="container">
+        <ol>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blog.html">Artikel</a></li>
+         
+        </ol>
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
       <div class="container" data-aos="fade-up">
 
-
         <div class="row">
 
-          <div class="col-lg-12 entries">
-            @foreach ($artikel as $item)
-              <article class="entry">
+          <div class="col-lg-8 entries">
 
-                <div class="entry-img">
-                  <img src="{{ asset('img/img_artikel/' . $item->gambar_artikel)  }}" alt="" class="img-fluid">
-                </div>
-                <div class="entry-meta">
-                  <ul>                    
-                    <li class="d-flex align-items-center"><i class="fa fa-user"></i> <a href="blog-single.html">User</a></li>
-                  </ul>
-                </div>
-                <div class="entry-content">
-                  <h2 class="entry-title">
-                    <a href="">{{ $item->judul_artikel }}</a>
-                  </h2>
-                  <div class="read-more">
-                    <a href="{{ route('detail-artikel.index', $item->id_artikel) }}">Read Article</a>
+            <div class="blog-comments">
+
+              <div class="reply-form">
+                
+                <form action="{{ isset($artikel) ? route('list-artikel.update', $artikel->id_artikel) : route('list-artikel.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    {!! isset($artikel) ? method_field('PUT') : '' !!}
+                    <input type="hidden" name="id_artikel" id="" value="{{ isset($artikel) ? $artikel->id_artikel : '' }}">
+                  <div class="row">
+                    <div class="col form-group">
+                      <input name="judul_artikel" type="text" class="form-control" placeholder="Judul" value="{{ isset($artikel) ? $artikel->judul_artikel : '' }}">
+                    </div>
                   </div>
-                </div>
-              </article>
-            @endforeach
+                  <div class="row">
+                    <div class="col form-group">
+                      <textarea name="isi_artikel" class="form-control" placeholder="Artikel">{{ isset($artikel) ? $artikel->isi_artikel : '' }}</textarea>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Unggah Artikel</button>
+              </div>
+
+            </div><!-- End blog comments -->
 
           </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+
+            <div class="sidebar">
+
+              <div class="col-xl-5 col-lg-5">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div
+                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Upload Foto</h6>
+                     
+                    </div>
+                    <div  class="wrapper">
+                        <div class="box">
+                            <div class="js--image-preview"></div>
+                            <div class="upload-options">
+                              <label>
+                                <input type="file" class="image-upload" accept="image/*" name="gambar_artikel"/>
+                              </label>
+                            </div>
+                          </div>
+                    </div>
+                </form>
+
+                    {{-- <input type="submit" class="btn btn-primary"> --}}
+
+                    <!-- Card Body -->
+              
+                </div>
+            </div>
+
+            </div><!-- End sidebar -->
+
+          </div><!-- End blog sidebar -->
+        </div>
 
         </div>
 
       </div>
-    </section><!-- End Blog Section -->
+    </section><!-- End Blog Single Section -->
 
   </main><!-- End #main -->
 

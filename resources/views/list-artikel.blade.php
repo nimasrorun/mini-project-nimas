@@ -10,6 +10,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
+  <link href="{{asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('img/favicon.png')}}" rel="icon">
   <link href="{{asset('img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
@@ -49,14 +50,19 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="home-penulis.html">Home</a></li>
-          <li><a class="active" href="penulis.html">Artikel</a></li>
+          <li><a href="{{ route('homepage') }}">Home</a></li>
+          <li><a class="active" href="{{ route('list-artikel.index') }}">Artikel</a></li>
         
 
-          <li><a class="getstarted" href="login.html">Logout</a></li>
+          <li>
+            <form action="{{ route('penulis.logout') }}" method="POST">
+              @csrf
+            <button class="getstarted" type="submit">Logout</button>
+          </form>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+      </nav>
 
     </div>
   </header><!-- End Header -->
@@ -81,82 +87,38 @@
 
         <div class="row">
 
-          <div class="col-lg-8 entries">
-
-            <div class="blog-comments">
-
-              <div class="reply-form">
-                
-                <form action="">
-                  <div class="row">
-                    <div class="col form-group">
-                      <input name="website" type="text" class="form-control" placeholder="Judul">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col form-group">
-                      <textarea name="comment" class="form-control" placeholder="Artikel"></textarea>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Unggah Artikel</button>
-
-                </form>
-
-              </div>
-
-            </div><!-- End blog comments -->
-
-          </div><!-- End blog entries list -->
-
-          <div class="col-lg-4">
-
-            <div class="sidebar">
-
-              <div class="col-xl-5 col-lg-5">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div
-                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Upload Foto</h6>
-                     
-                    </div>
-                    <div  class="wrapper">
-                        <div class="box">
-                            <div class="js--image-preview"></div>
-                            <div class="upload-options">
-                              <label>
-                                <input type="file" class="image-upload" accept="image/*" name="file"/>
-                              </label>
-                            </div>
-                          </div>
-                    </div>
-                    {{-- <input type="submit" class="btn btn-primary"> --}}
-
-                    <!-- Card Body -->
-              
-                </div>
-            </div>
-
-            </div><!-- End sidebar -->
-
-          </div><!-- End blog sidebar -->
           <div class="card">
             <div class="card-body reply-form">
               <div class="col-lg-12">
+                <div class="float-right mb-3">
+                  <a href="{{ route('list-artikel.create') }}"><button class="btn btn-primary">Tambah Data</button></a>
+                </div>
                 <table class="table-bordered table">
                   <thead>
-                    <th>adawd</th>
-                    <th>adawd</th>
-                    <th>adawd</th>
-                    <th>adawd</th>
+                    <th>Judul Artikel</th>
+                    <th>Penulis</th>
+                    <th>Tanggal</th>
+                    <th>Aksi</th>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>awdad</td>
-                      <td>awdad</td>
-                      <td>awdad</td>
-                      <td>awdad</td>
-                    </tr>
+
+                    @foreach ($artikel as $item)
+                      <tr>
+                        <td>{{ $item->judul_artikel }}</td>
+                        <td>{{ $item->id_artikel }}</td>
+                        <td>{{ $item->tanggal }}</td>
+                        <td>
+                          <div class="btn-group">
+                            <a href="{{ route('list-artikel.edit', $item->id_artikel) }}"><button class="btn btn-warning"><i class="fas fa-edit fa-sm"></i></button></a>
+                            <form action="{{ route('list-artikel.destroy', $item->id_artikel) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    @endforeach
                   </tbody>
                 </table>
               </div>
