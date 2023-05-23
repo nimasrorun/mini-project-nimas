@@ -140,6 +140,29 @@
             </div><!-- End sidebar -->
 
           </div><!-- End blog sidebar -->
+          <div class="card">
+            <div class="card-body reply-form">
+              <div class="col-lg-12">
+                <table class="table-bordered table">
+                  <thead>
+                    <th>adawd</th>
+                    <th>adawd</th>
+                    <th>adawd</th>
+                    <th>adawd</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>awdad</td>
+                      <td>awdad</td>
+                      <td>awdad</td>
+                      <td>awdad</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+
 
         </div>
 

@@ -32,3 +32,15 @@ Route::get('/list-artikel', function(){
 Route::get('/detail-artikel', function(){
     return view('detail-artikel');
 });
+
+Route::get('/listartikeladmin', function(){
+    return view('backend.layouts.listartikel-admin');
+})->name('listartikeladmin');
+
+Route::get('/listpenulisadmin', function(){
+    return view('backend.layouts.listpenulis');
+})->name('listpenulis');
+
+Route::get('/loginadmin', function(){
+    return view('loginadmin');
+})->name('loginadmin');
